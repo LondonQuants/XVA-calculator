@@ -1,1 +1,2 @@
 Test file from GitHub
+This is a line added from the Cloud
