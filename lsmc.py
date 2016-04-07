@@ -1,23 +1,8 @@
 import numpy.random as npr
-import datetime as dtt
 import numpy as np
 
-s0 = 900
-k = 890
-r = 0.05
-q = 0.045
-sigma = 0.2
-t = 0.5
-flag = 'call'
-t_steps = 1000
-n_paths = 10000
 
-lamb = 0.75
-mu = -0.6
-delta = 0.25
-    
-
-def simulate(t):
+def simulate(s0, r, q, sigma, t, t_steps, n_paths):
     np.random.seed(123456)
     dt = t / t_steps
     s = np.zeros((t_steps+1, n_paths))
@@ -28,7 +13,7 @@ def simulate(t):
     return s
 
   
-def simulate_j(t):
+def simulate_j(s0, r, q, sigma, t, t_steps, n_paths):
     np.random.seed(123456)
     dt = t / t_steps
     rj = lamb * (np.exp(mu + 0.5*delta**2) - 1)
@@ -43,7 +28,7 @@ def simulate_j(t):
     return s
 
   
-def lsmc(s, t, k, r, flag, method='poly'):
+def lsmc(s, t, k, r, t_steps, n_paths, flag, method='poly'):
     m = 1 if flag == 'call' else -1
     h = np.maximum(m*(s-k), 0)  # inner values for put option
     v = np.zeros_like(h)  # value matrix
@@ -63,15 +48,5 @@ def lsmc(s, t, k, r, flag, method='poly'):
     
     return v0, v[1,:]
 
-
-starttime = dtt.datetime.now()
-strike = 110
-s = simulate(t)
-
-V0, V = lsmc(s, t, k, r, flag, method='laguerre')
-print ("{} Option Value {}".format(flag, V0))
-
-endtime = dtt.datetime.now()
-print ("Time elapsed: {}\n\
-        n of time steps: {}\n\
-        n of MC paths: {}".format(endtime - starttime, t_steps, n_paths))
+if __name__ == '__main__':
+    pass
