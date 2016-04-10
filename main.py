@@ -10,8 +10,8 @@ q = 0.045
 sigma = 0.2
 t = 0.5
 flag = 'call'
-t_steps = 1000
-n_paths = 10000
+t_steps = 100
+n_paths = 100000
 
 lamb = 0.75
 mu = -0.6
