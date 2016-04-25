@@ -24,7 +24,7 @@ class BootstrapYieldCurve():
 
   def __bootstrap_zero_coupons__(self):
   #   """ Get zero rates from zero coupon bonds """
-      for T in self.instruments.iterkeys():
+      for T in self.instruments.keys(): # OK I CHANGED THE CODE HERE
           (par, coup, price, freq) = self.instruments[T]
           if coup == 0:
              self.zero_rates[T] = \
@@ -79,7 +79,7 @@ yield_curve.add_instrument(100, 1.0, 0., 90.)
 yield_curve.add_instrument(100, 1.5, 8, 96., 2)
 yield_curve.add_instrument(100, 2., 12, 101.6, 2)
 
-#y =import matplotlib.pyplot as plt
+#Plot
 
 import matplotlib.pyplot as plt
 y = yield_curve.get_zero_rates()
